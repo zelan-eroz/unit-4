@@ -1,9 +1,33 @@
-from flask import Flask, request, render_template, redirect, url_for, make_response
+from flask import Flask, request, render_template, redirect, url_for, make_response, session
 from my_lib import database_worker, encrypt_password, check_password
 import time
 from datetime import datetime
 
 app = Flask(__name__)
+
+
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+# @app.route('/', methods=['GET', 'POST'])
+# def scratch3():
+#     return render_template('scratch3.html', num=0, button_color='grey')
+#
+# @app.route('/update', methods=['POST'])
+# def update():
+#     num = int(request.form['num'])
+#     button_color = request.form['button_color']
+#     if button_color == 'grey':
+#         num += 1
+#         button_color = 'blue'
+#     else:
+#         num -= 1
+#         button_color = 'grey'
+#     return render_template('scratch3.html', num=num, button_color=button_color)
+
+
+
 
 @app.route('/signup', methods=['GET','POST'])
 def signup():
@@ -72,16 +96,37 @@ def home():
     if id:
         db = database_worker('woof.db')
         print("Home database open")
-        uname = db.search(f"SELECT * from users where username='{id}'")
-        print("uname open")
-        uname = uname[0][2]
-        print(uname)
         posts = db.search(f"SELECT * from posts")
         print(posts)
         db.close()
         return render_template('home.html', posts=posts)
+        print("Website submitted")
     else:
         return redirect("/login")
+
+@app.route('/update', methods=['POST'])
+def update():
+    if request.method=='POST':
+        num = request.form['num']
+        post_id = request.form['post_id']
+        id=request.cookies.get('user_id')
+        db=database_worker('woof.db')
+        #CHECK IF USER ALREADY LIKED
+        liked = db.search(f"SELECT * FROM likes where uid='{id}' AND post_id={post_id}")
+
+        #IF USER ALREADY LIKED, UNLIKE THE POST BY DECREASING NUM VALUE & DELETING ROW IN LIKES
+        if liked:
+            db.run_save(f"UPDATE posts set likes=likes-1 where id={post_id}")
+            db.run_save(f"DELETE from likes where uid='{id}' AND post_id={post_id}")
+        elif not liked:
+            db.run_save(f"UPDATE posts set likes=likes+1 where id={post_id}")
+            db.run_save(f"INSERT INTO likes(post_id,uid) VALUES({post_id},'{id}')")
+
+        #UPDATE HTML POSTS
+        posts = db.search(f"SELECT * from posts")
+        db.close()
+        return render_template('home.html', posts=posts)
+
 
 @app.route("/profile", methods=['GET','POST'])
 def profile2():
@@ -126,7 +171,7 @@ def post():
             print('cookie requested, ', user_id)
         #DO SOMETHING WITH THE POSTS
         db = database_worker("woof.db")
-        new_post = f"INSERT into posts (uid,title, post, flair, date) values ('{user_id}','{title}','{content}','{flair}','{str_date}')"
+        new_post = f"INSERT into posts (uid,title, post, flair, date,likes) values ('{user_id}','{title}','{content}','{flair}','{str_date}',0)"
         db.run_save(new_post)
         db.close()
         return redirect('/home')
