@@ -15,6 +15,7 @@
         <li><a href="/home" style="text-decoration: none;"><i class="fa fa-home"></i><span class="nav-item">Home</span></a></li>
         <li><a href="#" style="text-decoration: none;"><i class="fa fa-heart"></i><span class="nav-item">Pet Care</span></a></li>
         <li><a href="#" style="text-decoration: none;"><i class="fa fa-dog"></i><span class="nav-item">Shelters</span></a></li>
+        <li><a href="/saves" style="text-decoration: none;"><i class="fa-regular fa-bookmark"></i><span class="nav-item">Saved</span></a></li>
         <li><a href="/logout" class="logout" style="text-decoration: none;"><i class="fa fa-sign-out-alt"></i><span class="nav-item">Log out</span></a></li>
         <li></li>
     </ul>
@@ -28,32 +29,34 @@
             <a href="/new_post">What's on your mind?</a>
         </div>
         <div class="section-main">
-            {% for post in posts %}
-            <!--SECTION-LOGIN-2 -->
-            <div class="section-login-2" style="height: border-box">
-                <div class="section-login-2-main">
-                    <div class="uname-bar">
-                        <h3 class="uname">{{ post[1] }}</h3>
-                        <p class="date">{{ post[5]}}</p>
-                    </div>
-                    <div class="section-login-2-form" method="post">
-                        <h1 class="section-login-2-title">{{ post[2] }}</h1>
-                        <div class="login-form-3" style="height: 50%;">
-                            <p>{{ post[3] }}</p>
+                {% for post in posts %}
+                <!--SECTION-LOGIN-2 -->
+                <div class="section-login-2" style="height: border-box">
+                    <div class="section-login-2-main">
+                        <div class="uname-bar">
+                            <h3 class="uname">{{ post[1] }}</h3>
+                            <p class="date">{{ post[5]}}</p>
                         </div>
-                        <form class="login-form-submit-btn" method="POST" action="{{ url_for('update') }}"style="height: 0.5vh; position: inherit">
-                            <button type="submit" style="align-items: center; width:20%; color:dimgray" class="like-btn"><i class="fa-regular fa-heart" style="padding-right: 20px; color:black"></i>{{ post[6] }}</button>
-                            <input type="hidden" name="num" value="{{ post[6] }}">
-                            <input type="hidden" name="post_id" value="{{ post[0] }}">
-                            <button style="align-items: center;"><i class="fa-regular fa-comment"></i></button>
-                            <button style="align-items: center;"><i class="fa-regular fa-bookmark"></i></button>
-                        </form>
+                        <div class="section-login-2-form" method="post">
+                            <h1 class="section-login-2-title">{{ post[2] }}</h1>
+                            <div class="login-form-3" style="height: 50%;">
+                                <p>{{ post[3] }}</p>
+                            </div>
+                            <form class="login-form-submit-btn" method="POST" action="{{ url_for('update') }}"style="height: 0.5vh; position: inherit">
+                                <!-- Like button-->
+
+                                <button type="submit" name='submit' value="like" style="align-items: center; width:20%; color:dimgray" class="like-btn"><i class="fa-regular fa-heart" style="padding-right: 20px; color:black"></i>{{ post[6] }}</button>
+                                <input type="hidden" name="num" value="{{ post[6] }}">
+                                <input type="hidden" name="post_id" value="{{ post[0] }}">
+                                <button style="align-items: center;"><i class="fa-regular fa-comment"></i></button>
+                                <!-- Save button-->
+                                <button class="save-btn" name='submit' style="align-items: center;" type="submit" value="save"><i class="fa-regular fa-bookmark"></i></button>
+                                <!--<input type="hidden" name="saved" value="{ }}">-->
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {%endfor %}
-
-
+                {%endfor %}
         </div>
 </main>
 </body>
