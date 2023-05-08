@@ -9,25 +9,9 @@ app = Flask(__name__)
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
-
-# @app.route('/', methods=['GET', 'POST'])
-# def scratch3():
-#     return render_template('scratch3.html', num=0, button_color='grey')
-#
-# @app.route('/update', methods=['POST'])
-# def update():
-#     num = int(request.form['num'])
-#     button_color = request.form['button_color']
-#     if button_color == 'grey':
-#         num += 1
-#         button_color = 'blue'
-#     else:
-#         num -= 1
-#         button_color = 'grey'
-#     return render_template('scratch3.html', num=num, button_color=button_color)
-
-
-
+@app.route('/', methods=['GET','POST'])
+def about():
+    print('hello world')
 
 @app.route('/signup', methods=['GET','POST'])
 def signup():
@@ -110,6 +94,7 @@ def update():
         post_id = request.form['post_id']
         id = request.cookies.get('user_id')
         db = database_worker('woof.db')
+        #---------------------------------------------------------#
         if request.form['submit'] == 'like':
             print('like button clicked')
             num = request.form['num']
@@ -128,6 +113,7 @@ def update():
             posts = db.search(f"SELECT * from posts")
             db.close()
             return render_template('home.html', posts=posts)
+        # ---------------------------------------------------------#
         elif request.form['submit']=='save':
             print('save button clicked.')
             posts = db.search(f"SELECT * from posts")
@@ -142,9 +128,27 @@ def update():
                 db.run_save(f"INSERT INTO saves(post_id, uid) VALUES({post_id},'{id}')")
             db.close()
             return render_template('home.html', posts=posts)
+        # ---------------------------------------------------------#
+        elif request.form['submit']=='comment':
+            print('Comment button clicked.')
+            return redirect(url_for(f'comment',post_id=post_id))
     else:
-        return render_template('/home')
+        return redirect('/home')
 
+@app.route("/new_comment", methods=['GET','POST'])
+def comment():
+    post_id = request.args.get('post_id')
+    id = request.cookies.get('user_id')
+    db = database_worker("woof.db")
+    post = db.search(f"SELECT * FROM posts where id={post_id}")
+    if request.method == 'POST':
+        reply = request.form['content']
+        db.run_save(f"INSERT INTO comments(post_id, uid,comment) values({post_id},'{id}','{reply}')")
+    comments = db.search(f"SELECT * FROM comments where post_id={post_id}")
+    print(comments)
+    db.close()
+
+    return render_template('new_comment.html', post=post, comments=comments, id=id)
 
 
 @app.route("/profile", methods=['GET','POST'])
