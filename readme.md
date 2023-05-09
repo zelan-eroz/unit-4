@@ -79,7 +79,10 @@ Python and Flask will be used to develop the web application, along with the thr
 #### System Diagrams
 #### Wireframes
 #### UML Diagram
+#### Database
+![](documentation/database.png)
 #### ER Diagram
+![](documentation/er.jpeg)
 #### Flowcharts
 **Registration System**
 **Log in System**
