@@ -218,7 +218,10 @@ def pet_care():
 
 @app.route('/shelters', methods=['GET','POST'])
 def shelters():
-    return render_template('shelters.html')
+    db = database_worker('woof.db')
+    posts = db.search("SELECT * FROM SHELTERS")
+    print(posts)
+    return render_template('shelters.html', posts=posts)
 
 
 @app.route('/logout', methods=['GET', 'POST'])
