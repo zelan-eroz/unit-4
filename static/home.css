@@ -374,6 +374,12 @@ nav{
     transition: width 0.2s linear;
     box-shadow: 0 20px 35px rgba(0,0,0,0.1);
     overflow-y:auto;
+
+
+    z-index: 10000;
+   position: fixed;
+   top: 0px;
+   width: 100%;
 }
 
 .logo{
@@ -429,9 +435,3 @@ nav:hover{
     width: 200px;
     transition: all 0.5s ease;
 }
-
-.logout{
-    position: absolute;
-    bottom: 20px;
-}
-

@@ -212,6 +212,15 @@ def post():
         return redirect('/home')
     return render_template('new_post.html')
 
+@app.route('/pet_care', methods=['GET','POST'])
+def pet_care():
+    return render_template('pet_care.html')
+
+@app.route('/shelters', methods=['GET','POST'])
+def shelters():
+    return render_template('shelters.html')
+
+
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     resp = make_response(render_template('login.html'))
