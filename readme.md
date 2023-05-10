@@ -82,20 +82,28 @@ I will develop a social networking platform in the form of a web application bui
 #### System Diagram ---- (TO BE CHECKED BY DR. RUBEN)
 #### Wireframes
 ![](documentation/wireframe.jpeg)
+*Figure 4. Wireframe of the Woof Wise web app*
 #### UML Diagram ---- TBD!!!!
+*Figure 5. UML Diagram of the Woof Wise web app*
 #### Database
 ![](documentation/database.png)
+*Figure 6. Diagram of data tables used for the Woof Wise web app*
 #### Sample Data Entries
 ![](documentation/data_sample.png)
+*Figure 7. Sample data entries in the users table of the database*
 #### ER Diagram
 ![](documentation/er.jpeg)
+*Figure 8. Entity Relation Diagram of the Woof Wise web app*
 #### Flowcharts ---- TBD!!!!
 **Registration System**
-**Log in System**
+*Figure 9. Flowchart of the Woof Wise web app registration algorithm*
+**Like/Dislike**
+*Figure 10. Flowchart of the Woof Wise web app like/dislike algorithm*
 **Add post**
+*Figure 11. Flowchart of the Woof Wise web app post creation algorithm*
 
 
-### Test Table ---- TO BE EDITED!!!!!!!!!!! THIS IS FROM THE UNIT 3 PROJECT!!!!
+### Test Table 
 | Test No | Test Type                                                                                          | Date   | Procedure                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Expected Outcome                                                                                                                                                                                                                                                                                              |
 |---------|----------------------------------------------------------------------------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
 | 1       | Functional: Test  whether the SignUp page succesfully registers new user if all entries are valid. | Apr 23 | Run python file (app.py). Go to sign up page and enter the following values: <br/>- email: bob@isak<br/>- username: bob<br/>-password: bob123456                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | When the database, woof.db is checked, a new row of data can be seen. This row shows the entered email, username, and password encrypted using a certain hash.                                                                                                                                                |  
