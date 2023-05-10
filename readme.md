@@ -25,6 +25,8 @@ The proposed solution is a web application that allows users to post questions/s
 
 Python and Flask will be used to develop the web application, along with the three main programming languages commonly used to build a web application, HTML, CSS, and JavaScript. It is optimal to use Python for the development of the application since it's platform independent,that is, one can develop in one operating system and does not have to worry of incompatibility on other operating systems[^9]. Flask will be used for the web app because it is a lightweight framework that can handle multiple requests concurrently, allowing efficiency and fast response times for the users' end. HTML is provides the structure and content of web pages, allowing users to easily navigate and understand the information presented. CSS allows for aesthetic,  making it visually appealing and engaging for users, thus enhancing the overall user experience.  Lastly, SQLite is self-contained relational database management  which will be used due to its simplicity, reliability, and portability allowing for the program and the database to both be localized.
 
+### Design Statement
+I will develop a social networking platform in the form of a web application built with Flask, HTML, CSS, Python, and SQLite as the database management engine. This web application will allow both pet owners and potential pet owners to post information or questions about pet care. The web app will include the following features: save post, like/dislike, comment, and sort through posts. It will take about 3 weeks to a month to complete the development of the project and will be evaluated according to a certain success criteria set.   
 
 ### Criteria for Success
 1. [the measures of taking care of pets is different for every dog type and owner, thus there is a need for personalization by allowing users to post about a subject and by allowing interactions with other users with similar experiences or pet breed]: The web application is a social network where users are able to post about topics and categorize them into “Advice”, “Emotional Support”, “Report”, and “Fluff”
@@ -76,14 +78,16 @@ Python and Flask will be used to develop the web application, along with the thr
 |        | Finish video for Criteria D.                                                                                                                                                                               |	A video evidence of all the success criterias functioning and working within the developed application.	| 30 min| 	| 	D | 
 
 ### Internal Structure (Diagrams)
-#### System Diagram
+#### System Diagram ---- (TO BE CHECKED BY DR. RUBEN)
 #### Wireframes
-#### UML Diagram
+![](documentation/wireframe.jpeg)
+#### UML Diagram ---- TBD!!!!
 #### Database
 ![](documentation/database.png)
+#### Sample Data Entries
 #### ER Diagram
 ![](documentation/er.jpeg)
-#### Flowcharts
+#### Flowcharts ---- TBD!!!!
 **Registration System**
 **Log in System**
 **Add post**
@@ -118,6 +122,45 @@ Python and Flask will be used to develop the web application, along with the thr
 
 
 ## Criteria C. Development 
+**Software Development Tools**
+* PyCharm
+* Python
+* SQLite
+* Flask
+* Jinja2
+* HTML
+* CSS
+* ChatGPT
+
+**Libraries/Modules**
+Flask
+* Flask
+* request
+* render_template
+* redirect
+* url_for
+* make_response
+
+Python
+* time
+* datetime
+* sqlite3
+* CryptContext
+
+**Techniques Applied**
+* Flask App Routing
+* Cookies
+* GET and POST methods
+* Functions
+* if, elif, and else statements
+* variables
+* for loops
+* Password Encryption: Passlib CryptContext
+* Database interaction
+* Text Formatting
+* CSS styling
+
+
 ### Explanation of Techniques and Evidence
 ### Ingenuity
 ### Complexity
@@ -146,4 +189,11 @@ Python and Flask will be used to develop the web application, along with the thr
 
 ## Criteria E. Evaluation
 ### Evaluation
+#### Client Evaluation
+| Success Criteria | Status   | Description |
+|------------------|----------|-------------|
+| /                | Achieved |             |
+
+#### Peer Evaluation
+
 ### Recommendations
