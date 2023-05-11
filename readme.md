@@ -283,12 +283,98 @@ The provided code handles the update functionality for a specific post in the Wo
 The code block starting from line 9 handles the specific case when the 'like' button is clicked. It checks if the value of the 'submit' field in the form is 'like' (line 9). If it is, the code proceeds to update the likes for the corresponding post and perform the necessary actions. Lines 11-17 handle the logic for liking/unliking a post. First, the code checks if the user has already liked the post by searching for a matching entry in the 'likes' table for the user_id and post_id. If a match is found (line 13), it means the user has already liked the post, so the code decreases the likes count for the post and deletes the corresponding entry in the 'likes' table. If no match is found (line 15), it means the user has not liked the post yet, so the code increases the likes count for the post and inserts a new entry in the 'likes' table.  After updating the likes and likes-related records, the code proceeds to update the HTML representation of the posts (lines 20-21). It performs a new database query to retrieve the updated post data, assigns it to the 'posts' variable, and then closes the database connection.  Finally, the updated posts data is passed to the 'home.html' template, and the template is rendered with the updated data using the render_template function (line 22).
 
 **Commenting Functionality - Success Criteria 2**
+```pycon
+@app.route('/update', methods=['POST'])
+def update():
+    if request.method=='POST':
+        if request.form['submit']=='like':
+            ...#miscellaneous lines of code
+        elif request.form['submit']=='save':
+            ...#miscellaneous lines of code
+        elif request.form['submit']=='comment':
+            return redirect(url_for(f'comment',post_id=post_id))
+    else:
+        return redirect('/home')
+```
 
+```pycon
+@app.route("/new_comment", methods=['GET','POST'])
+def comment():
+    post_id = request.args.get('post_id')
+    id = request.cookies.get('user_id')
+    db = database_worker("woof.db")
+    post = db.search(f"SELECT * FROM posts where id={post_id}")
+    if request.method == 'POST':
+        reply = request.form['content']
+        db.run_save(f"INSERT INTO comments(post_id, uid,comment) values({post_id},'{id}','{reply}')")
+    comments = db.search(f"SELECT * FROM comments where post_id={post_id}")
+    print(comments)
+    db.close()
+
+    return render_template('new_comment.html', post=post, comments=comments, id=id)
+
+```
 
 **Pet Care Page - Success Criteria 3**
 
 
 **Shelters Information Page - Success Criteria 4**
+
+The provided code is important for achieving the success criteria of showing a directory of pet shelters with their name, address, telephone number, email, and contact person.
+
+```html
+<body style="display: flex; flex-direction: row;">
+<div class="nav-parent" style="background: white; position: fixed; overflow: hidden; width: 100%">
+    <ul style="display: flex; flex-direction: row; list-style-type: none;">
+        <li><a href="#" class="logo"><img src="/static/logos/trans.png" style="width: 50px"><span class="logo"></span></a></li>
+        <li><a href="/home" style="text-decoration: none;"><i class="fa fa-home"></i><span class="nav-item">Home</span></a></li>
+        <li><a href="/pet_care" style="text-decoration: none;"><i class="fa fa-heart"></i><span class="nav-item">Pet Care</span></a></li>
+        <li><a href="/shelters" style="text-decoration: none;"><i class="fa fa-dog" style="color:#9C61F1;"></i><span class="nav-item" style="color:#9C61F1;">Shelters</span></a></li>
+        <li><a href="/saves" style="text-decoration: none;"><i class="fa-regular fa-bookmark"></i><span class="nav-item">Saved</span></a></li>
+        <li><a href="/profile" style="text-decoration: none;"><i class="fa fa-user" style=""></i><span class="nav-item">Profile</span></a></li>
+        <li><a href="/logout" class="logout" style="text-decoration: none;"><i class="fa fa-sign-out-alt"></i><span class="nav-item">Log out</span></a></li>
+    </ul>
+</div>
+
+
+<!--CARD TO BE REPLICATED-->
+
+    <div class="cards" style="flex-direction: row;row-gap: 10px; padding-top: 5%;">
+    {% for post in posts %}
+        <div class="card">
+            <div class="card-title" style="margin-top: 2px;">
+                <h2 style="color:#9C61F1;">
+                    {{ post[1]}}
+                    <small style="color: #2F2F2F;font-weight: normal; padding-top: 5px;"><i class="fas fa-map-marker-alt" style="margin-right: 12px;"></i>{{ post[2] }}</small>
+                    <small style="color: #2F2F2F;font-weight: normal;"><i class="fas fa-phone fa-flip-horizontal" style="margin-right: 8px;"></i>{{ post[3] }}</small>
+                </h2>
+            </div>
+            <div class="card-content">
+                <p style="color: #2F2F2F; padding-left: 15px; padding-right: 15px;padding-top:6px;padding-bottom: 10px;">
+                      {{ post[4] }}
+                </p>
+            </div>
+
+        </div>
+
+    {% endfor %}
+</div>
+</body>
+```
+* Navbar: the ```<div>``` section with class "nav-parent" creates a fixed navigation bar at the top of the page. It contains ```<ul>``` with ```<li>``` elements representing different navigation links such as Home, Pet Care, Shelters, Saved, Profile, and Log out. This allows users to easily navigate through your web app.
+
+* Shelter Cards: The code enclosed within the ```{% for post in posts %}``` and ```{% endfor %}``` Jinja tags generates dynamic content for each shelter entry. It iterates over the posts data to display individual cards for each shelter. The card displays the shelter's name, address, telephone number, and contact person. This allows users to browse through the directory and view details about each shelter.
+
+```pycon
+@app.route('/shelters', methods=['GET','POST'])
+def shelters():
+    db = database_worker('woof.db')
+    posts = db.search("SELECT * FROM SHELTERS")
+    print(posts)
+    return render_template('shelters.html', posts=posts)
+```
+Line 4 executes a SELECT query on the 'woof.db' database, retrieving all the data from the 'SHELTERS' table. The query fetches all columns (*) from the 'SHELTERS' table.
+The `SHELTERS` table in the woof.db database contains the shelter name, address, phone number, and content.
 
 
 **Bookmark/Save Post Functionality - Success Criteria 5**
