@@ -27,13 +27,13 @@ I will develop a social networking platform in the form of a web application bui
 6. <a href="#prob2" style="color:#eb349b">The web app allows users to view posts according to the flair(category) the post is in.</a>
 
 **Evidence**
-![](evn3.png)
+![](evn3.png) 
 *Figure 1. Image of diary entry and pages during brainstorming*
 
-![](evn2.jpg)
+![](evn2.jpg) 
 *Figure 2. Page on journal during project brainstorming process*
 
-![](evn1.jpg)
+![](evn1.jpg) 
 *Figure 3. Page on journal during project brainstorming process*
 
 
@@ -131,49 +131,147 @@ I will develop a social networking platform in the form of a web application bui
 
 
 
-## Criteria C. Development 
-**Software Development Tools**
-* PyCharm
-* Python
-* SQLite
-* Flask
-* Jinja2
-* HTML
-* CSS
-* ChatGPT
+## Criteria C. Development
+| Software Development Tool | Explanation of Use                                                                                                                                                                                                                                  |
+|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| PyCharm                   | I used PyCharm as it is an integrated development environment (IDE) for Python that provides a range of features to facilitate code editing, debugging, and project management.                                                                     |
+| Python                    | A high-level programming language which I coded in due to its wide array of libraries and community of developers.                                                                                                                                  |
+| SQLite                    | A lightweight and serverless database engine where I stored all user input data for the project. My database is titled ```woof.db````                                                                                                               |
+| Flask                     | Flask is a micro web framework for Python that provides tools and libraries to build web applications. It enabled me to use HTML files or templates, use cookies for different users, and was overall essential during the web development process. |
+| Jinja2                    | A templating engine for Python that allowed me to blend data management with my HTML templates or pages.                                                                                                                                            |
+| HTML                      | The standard markup language used to structure and present content on the web. HTML helped me construct the content of the web pages.                                                                                                               |
+| CSS                       | Together with HTML, I used CSS to work on the aesthetic or visual appearance of the app and the corresponding elements within each HTML file.                                                                                                       |
+| ChatGPT                   | The tool was consulted to create code benchmarks, not the code of the app itself, for specific aspects of the web app development process where I wasn't familiar of. Ex. pop ups.                                                                  |
 
-**Libraries/Modules**
-Flask
-* Flask
-* request
-* render_template
-* redirect
-* url_for
-* make_response
+| Library/Module          | Explanation of Use |
+|-------------------------|--------------------|
+| Flask: Flask            |                    |
+| Flask: request          |                    |
+| Flask: render_template  |                    |
+| Flask: redirect         |                    |
+| Flask: url_for          |                    |
+| Flask: make_response    |                    |
+| Python: time & datetime |                    |
+| Python: sqlite3         |                    |
+| Python: CryptContext    |                    |
 
-Python
-* time
-* datetime
-* sqlite3
-* CryptContext
 
-**Techniques Applied**
-* Flask App Routing
-* Cookies
-* GET and POST methods
-* Functions
-* if, elif, and else statements
-* variables
-* for loops
-* Password Encryption: Passlib CryptContext
-* Database interaction
-* Text Formatting
-* CSS styling
+
+| Technique Applied      | Explanation of Use |
+|------------------------|--------------------|
+| Flask App Routing      |                    |
+| Cookies                |                    |
+| GET and POST methods   |                    |
+| Functions              |                    |
+| if and else statements |                    |
+| variables              |                    |
+| for loops              |                    |
+| Password Encryption    |                    |
+| Database interaction   |                    |
+| Text formatting        |                    |
+| CSS styling            |                    |
 
 
 ### Explanation of Techniques and Evidence
+**Navigation Bar**
+
+**Cards**
+
+**App Routing**
+
+**Registration System**
+```pycon
+@app.route('/signup', methods=['GET','POST'])
+def signup():
+    message=''
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        db = database_worker('woof.db')
+        existing_user = db.search(f"SELECT * from users where email = '{email}' or username='{username}'")
+        if existing_user:
+            #check existing email
+            if email == existing_user[0][1]:
+                message = "User with that email already exists. Try again."
+            elif username == existing_user[0][2]:
+                message = "User with that username already exists. Try again."
+            elif email== existing_user[0][1] and username==existing_user[0][2]:
+                message = "User with that username & email already exists. Perhaps log in instead?"
+        else:
+            new_user = f"INSERT into users (email,username, password) values ('{email}','{username}','{encrypt_password(password)}')"
+            db.run_save(new_user)
+            db.close()
+            return redirect("/home")
+    else:
+        return render_template("signup.html", message=message)
+```
+The provided code represents a Flask route called '/signup' that handles the signup functionality for my web application Woof Wise.In line 1, route declaration is done, meaning the code will handle requests related to '/signup'. The naming of this app route is deliberate to ensure that the code is comprehensive & organized. Line 4 ```if request.method=='POST'``` ensures that the code indented under line 4 will only be ran once the user clicks submit. This submit button is located in the HTML end of the app route. If the method is not POST, the user will stay access to the signup page. Lines 5 to 7 are used to extract data from the submitted form. Specifically, lines 5 to 8 retrieves the value entered in the 'username', 'password', and 'email' fields respectively of the signup form. Then lines 9 to 10 focus on database interaction. ```database_worker```, a custom class previously explained in this documentation, initializes a connection to the ```woof.db``` SQLite database. Line 10 ```existing_user = db.search(f"SELECT * from users where email = '{email}' or username='{username}'")``` executes a SELECT query to check if a user with the given email or username already exists in the database. Meanwhile lines 11 to 19 focus on validation and error handling. Specifically, if an existing user is found, line 13 and 15 checks if the email or username inputted is already registered in the database. If so, the code will output a message stating that a user already currently uses the email or username typed in. Line 17 checks if both username and email are already registered and outputs a message suggesting to the user to perhaps log in instead of registering a new account.  Line 19 checks if all these criteria were not met and moves on into generating a query to the database, inserting the new user, email, and password provided. The password provided is kept encrypted as seen in line 20 where ```encrypt_password```, a custom class that hashes a given text, is used before inserting  the value password to the database. This query is committed to the database and a new row of data appears in the database. ```db.close``` closes the database connection. Finally, the user is redirected to the home page upon successful sign up.
+
+**Log in System**
+```pycon
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method=='POST':
+        uname = request.form['uname']
+        password = request.form['password']
+        db=database_worker("woof.db")
+        existing_user = db.search(f"SELECT * from users where username='{uname}' or email='{uname}'")
+        print(check_password(password,existing_user[0][3]))
+        if existing_user:
+            if check_password(password, existing_user[0][3]):
+                print("Successfully logged in.")
+                #resp = make_response(render_template('profile.html'))
+                resp = make_response(redirect(url_for('home')))
+                resp.set_cookie('user_id',f'{existing_user[0][2]}')
+                print('Password is correct')
+                return resp
+            else:
+                error = "Incorrect password. Try again."
+                print(error)
+                return render_template('login.html', error=error)
+        else:
+            print("User does not exist. Try again.")
+        db.close()
+    else:
+        return render_template("login.html")
+```
+The provided code handles the login functionality for the Woof Wise web application. It checks if the submitted username or email exists in the database, verifies the password, and authenticates the user by setting a cookie. It also handles error scenarios, such as incorrect passwords or non-existing users.
+
+In line 1, the route decorator is used to specify that this code will handle requests related to the '/login' URL. This code represents the login page of the application. The methods argument is set to ['GET', 'POST'], indicating that this route can handle both GET and POST requests. Starting from line 3, the code checks if the request method is POST, which indicates that the user has submitted the login form. If it is, the code proceeds to extract the username and password from the submitted form in lines 4 and 5, respectively. 
+
+In line 6, the code initializes a connection to the 'woof.db' SQLite database using the database_worker class. This class allows interaction with the database.
+Next, in line 7, a SELECT query is executed to check if a user with the provided username or email exists in the database. The existing_user variable holds the result of this query.  In line 8, the password provided by the user is compared to the hashed password stored in the database using the check_password function. If the existing_user is not empty and the password matches, the user is considered authenticated, and the code proceeds to line 12.
+
+In line 12, a response object is created using make_response. It either renders the 'profile.html' template or redirects the user to the 'home' route using the redirect function from the url_for module. This line sets the response's cookie named 'user_id' with the value of the existing user's username.  The code in lines 14 and 15 handles incorrect password scenarios. If the password does not match, an error message is displayed in line 14, and the login template is rendered again with the error message.
+If the existing_user is empty, indicating that the user does not exist in the database, the code proceeds to line 17 and prints a message stating that the user does not exist.  Finally, in line 20, the database connection is closed, and if the request method is not POST (GET request), the login template is rendered without any error messages.
+
+
+**Like/Dislike Functionality**
+
+
+**Posting Functionality**
+
 ### Ingenuity
 ### Complexity
+
+## Criteria D. Functionality & Extensibility
+### Functionality
+### Extensibility
+
+## Criteria E. Evaluation
+### Evaluation
+#### Client Evaluation
+| Success Criteria | Status   | Description |
+|------------------|----------|-------------|
+| /                | Achieved |             |
+
+#### Peer Evaluation
+
+### Recommendations
+
+
+### References
 
 [^1]: SQLite Home Page. https://www.sqlite.org/index.html. Accessed 14 Apr. 2023. 
 
@@ -192,18 +290,3 @@ Python
 [^8]: Jinja — Jinja Documentation (3.1.x). https://jinja.palletsprojects.com/en/3.1.x/. Accessed 14 Apr. 2023.
 
 [^9]: Python Geeks. Advantages of Python | Disadvantages of Python. 25 June 2021, https://pythongeeks.org/advantages-disadvantages-of-python/.
-
-## Criteria D. Functionality & Extensibility
-### Functionality
-### Extensibility
-
-## Criteria E. Evaluation
-### Evaluation
-#### Client Evaluation
-| Success Criteria | Status   | Description |
-|------------------|----------|-------------|
-| /                | Achieved |             |
-
-#### Peer Evaluation
-
-### Recommendations

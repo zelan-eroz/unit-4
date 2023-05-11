@@ -20,11 +20,8 @@ def signup():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-        message = f"sent to server"
-        print(username, password,email)
         db = database_worker('woof.db')
         existing_user = db.search(f"SELECT * from users where email = '{email}' or username='{username}'")
-        print(existing_user)
         if existing_user:
             #check existing email
             if email == existing_user[0][1]:
@@ -37,7 +34,6 @@ def signup():
             new_user = f"INSERT into users (email,username, password) values ('{email}','{username}','{encrypt_password(password)}')"
             db.run_save(new_user)
             db.close()
-            print("Successful")
             return redirect("/home")
     else:
         return render_template("signup.html", message=message)
