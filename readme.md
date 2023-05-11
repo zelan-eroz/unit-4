@@ -180,6 +180,8 @@ I will develop a social networking platform in the form of a web application bui
 **App Routing**
 
 **Registration System**
+
+*Although the client did not specify an ecnrypted registration or log in system in the success criteria, it is important to discuss this step as a secure log in and registration system are good practices of a developer.*
 ```pycon
 @app.route('/signup', methods=['GET','POST'])
 def signup():
@@ -209,6 +211,7 @@ def signup():
 The provided code represents a Flask route called '/signup' that handles the signup functionality for my web application Woof Wise.In line 1, route declaration is done, meaning the code will handle requests related to '/signup'. The naming of this app route is deliberate to ensure that the code is comprehensive & organized. Line 4 ```if request.method=='POST'``` ensures that the code indented under line 4 will only be ran once the user clicks submit. This submit button is located in the HTML end of the app route. If the method is not POST, the user will stay access to the signup page. Lines 5 to 7 are used to extract data from the submitted form. Specifically, lines 5 to 8 retrieves the value entered in the 'username', 'password', and 'email' fields respectively of the signup form. Then lines 9 to 10 focus on database interaction. ```database_worker```, a custom class previously explained in this documentation, initializes a connection to the ```woof.db``` SQLite database. Line 10 ```existing_user = db.search(f"SELECT * from users where email = '{email}' or username='{username}'")``` executes a SELECT query to check if a user with the given email or username already exists in the database. Meanwhile lines 11 to 19 focus on validation and error handling. Specifically, if an existing user is found, line 13 and 15 checks if the email or username inputted is already registered in the database. If so, the code will output a message stating that a user already currently uses the email or username typed in. Line 17 checks if both username and email are already registered and outputs a message suggesting to the user to perhaps log in instead of registering a new account.  Line 19 checks if all these criteria were not met and moves on into generating a query to the database, inserting the new user, email, and password provided. The password provided is kept encrypted as seen in line 20 where ```encrypt_password```, a custom class that hashes a given text, is used before inserting  the value password to the database. This query is committed to the database and a new row of data appears in the database. ```db.close``` closes the database connection. Finally, the user is redirected to the home page upon successful sign up.
 
 **Log in System**
+
 ```pycon
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -246,11 +249,79 @@ Next, in line 7, a SELECT query is executed to check if a user with the provided
 In line 12, a response object is created using make_response. It either renders the 'profile.html' template or redirects the user to the 'home' route using the redirect function from the url_for module. This line sets the response's cookie named 'user_id' with the value of the existing user's username.  The code in lines 14 and 15 handles incorrect password scenarios. If the password does not match, an error message is displayed in line 14, and the login template is rendered again with the error message.
 If the existing_user is empty, indicating that the user does not exist in the database, the code proceeds to line 17 and prints a message stating that the user does not exist.  Finally, in line 20, the database connection is closed, and if the request method is not POST (GET request), the login template is rendered without any error messages.
 
+**Posting Functionality** [***Success Criteria 1***]
 
-**Like/Dislike Functionality**
+**Like/Dislike Functionality** [**Success Criteria 2**]
+```pycon
+@app.route('/update', methods=['POST'])
+def update():
+    if request.method=='POST':
+        post_id = request.form['post_id']
+        id = request.cookies.get('user_id')
+        db = database_worker('woof.db')
+        if request.form['submit'] == 'like':
+            print('like button clicked')
+            num = request.form['num']
+            # CHECK IF USER ALREADY LIKED
+            liked = db.search(f"SELECT * FROM likes where uid='{id}' AND post_id={post_id}")
+
+            # IF USER ALREADY LIKED, UNLIKE THE POST BY DECREASING NUM VALUE & DELETING ROW IN LIKES
+            if liked:
+                db.run_save(f"UPDATE posts set likes=likes-1 where id={post_id}")
+                db.run_save(f"DELETE from likes where uid='{id}' AND post_id={post_id}")
+            elif not liked:
+                db.run_save(f"UPDATE posts set likes=likes+1 where id={post_id}")
+                db.run_save(f"INSERT INTO likes(post_id,uid) VALUES({post_id},'{id}')")
+
+            # UPDATE HTML POSTS
+            posts = db.search(f"SELECT * from posts")
+            db.close()
+            return render_template('home.html', posts=posts)
+```
+The provided code handles the update functionality for a specific post in the Woof Wise web application. The code is associated with the '/update' URL and is triggered when a POST request is made to this URL.
+
+The code block starting from line 9 handles the specific case when the 'like' button is clicked. It checks if the value of the 'submit' field in the form is 'like' (line 9). If it is, the code proceeds to update the likes for the corresponding post and perform the necessary actions. Lines 11-17 handle the logic for liking/unliking a post. First, the code checks if the user has already liked the post by searching for a matching entry in the 'likes' table for the user_id and post_id. If a match is found (line 13), it means the user has already liked the post, so the code decreases the likes count for the post and deletes the corresponding entry in the 'likes' table. If no match is found (line 15), it means the user has not liked the post yet, so the code increases the likes count for the post and inserts a new entry in the 'likes' table.  After updating the likes and likes-related records, the code proceeds to update the HTML representation of the posts (lines 20-21). It performs a new database query to retrieve the updated post data, assigns it to the 'posts' variable, and then closes the database connection.  Finally, the updated posts data is passed to the 'home.html' template, and the template is rendered with the updated data using the render_template function (line 22).
+
+**Commenting Functionality - Success Criteria 2**
 
 
-**Posting Functionality**
+**Pet Care Page - Success Criteria 3**
+
+
+**Shelters Information Page - Success Criteria 4**
+
+
+**Bookmark/Save Post Functionality - Success Criteria 5**
+
+The provided code handles the bookmarking functionality for a specific post in the Woof Wise web application, which is directly related to the success criteria of allowing users to bookmark posts and save them in one page. This adds to the element of personalization stated in the problem description by allowing users to save information that are significant to them, based on their situation or pet's needs.
+```pycon
+def update():
+    if request.method=='POST':
+        post_id = request.form['post_id']
+        id = request.cookies.get('user_id')
+        db = database_worker('woof.db')
+    ... #miscellaneous lines of code
+    elif request.form['submit']=='save':
+        posts = db.search(f"SELECT * from posts")
+
+        # CHECK IF USER ALREADY SAVED
+        saved = db.search(f"SELECT * FROM saves where uid='{id}' AND post_id={post_id}")
+        if saved:
+            db.run_save(f"DELETE from saves where uid='{id}' AND post_id={post_id}")
+        elif not saved:
+            db.run_save(f"INSERT INTO saves(post_id, uid) VALUES({post_id},'{id}')")
+        db.close()
+        return render_template('home.html', posts=posts)
+```
+Lines 7-14 handle the bookmarking logic. The code checks if the user has already saved the post by searching for a matching entry in the 'saves' table for the user_id and post_id. If a match is found (line 9), it means the user has already saved the post, so the code deletes the corresponding entry from the 'likes' table (instead of the intended 'saves' table, which should be fixed), indicating that the user has unbookmarked the post.
+
+If no match is found (line 11), it means the user has not saved the post yet, so the code inserts a new entry in the 'saves' table, indicating that the user has bookmarked the post.
+
+The code then closes the database connection (line 15) and proceeds to render the 'home.html' template with the updated list of posts (line 16). This ensures that the user sees the updated bookmarked status of the post on the home page.
+
+**Post Sorting Functionality**
+
+
 
 ### Ingenuity
 ### Complexity

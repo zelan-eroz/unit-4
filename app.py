@@ -117,7 +117,7 @@ def update():
             # CHECK IF USER ALREADY SAVED
             saved = db.search(f"SELECT * FROM saves where uid='{id}' AND post_id={post_id}")
             if saved:
-                db.run_save(f"DELETE from likes where uid='{id}' AND post_id={post_id}")
+                db.run_save(f"DELETE from saves where uid='{id}' AND post_id={post_id}")
                 print("User already saved this.")
             elif not saved:
                 print("Saving now")
