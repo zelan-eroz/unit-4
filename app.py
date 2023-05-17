@@ -34,7 +34,7 @@ def signup():
             new_user = f"INSERT into users (email,username, password) values ('{email}','{username}','{encrypt_password(password)}')"
             db.run_save(new_user)
             db.close()
-            return redirect("/home")
+            return redirect(url_for("/home",post=[]))
     else:
         return render_template("signup.html", message=message)
 
@@ -50,7 +50,7 @@ def login():
             if check_password(password, existing_user[0][3]):
                 print("Successfully logged in.")
                 #resp = make_response(render_template('profile.html'))
-                resp = make_response(redirect(url_for('home')))
+                resp = make_response(redirect(url_for('home', post=[])))
                 resp.set_cookie('user_id',f'{existing_user[0][2]}')
                 print('Password is correct')
                 return resp
@@ -68,21 +68,34 @@ def login():
 def terms():
     return render_template("terms.html")
 
-@app.route('/home', methods=['GET','POST'])
-def home():
+@app.route('/home/<post>', methods=['GET','POST'])
+def home(post:list):
     print("Now in home")
     id=request.cookies.get('user_id')
     print("id: ",id)
-    if id:
+    print(post, type(post), len(post))
+    if len(post)==2 or post=="<post>":
         db = database_worker('woof.db')
         print("Home database open")
-        posts = db.search(f"SELECT * from posts")
-        print(posts)
+        post = db.search(f"SELECT * from posts")
+        print(post)
         db.close()
-        return render_template('home.html', posts=posts)
-        print("Website submitted")
+    return render_template('home.html', posts=post)
+
+@app.route('/process_option', methods=['GET','POST'])
+def process_option():
+    option = request.json['option']
+    print(option) # Print the received option on the server console
+    id=request.cookies.get('user_id')
+    if option!='All':
+        db = database_worker('woof.db')
+        posts=db.search(f"SELECT * FROM POSTS where flair='{option}'")
+        db.close()
+        print(posts)
+    if request.method=='POST':
+        return render_template('home.html', posts=[])
     else:
-        return redirect("/login")
+        return redirect('/home')
 
 @app.route('/update', methods=['POST'])
 def update():

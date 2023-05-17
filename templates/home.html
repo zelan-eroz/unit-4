@@ -8,15 +8,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+<script>
+
+    function sendOption() {
+  var selectedOption = document.getElementById("dropdown").value;
+  fetch('/process_option', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option: selectedOption })
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log(data); // Print the received response from the server
+  })
+  .catch(error => {
+    console.error(error); // Log any errors that occur during the request
+  });
+}
+
+</script>
 <div class="nav-parent" style="background: white; position: fixed; overflow: hidden;">
     <ul style="display: flex; flex-direction: row; list-style-type: none;">
-        <li><a href="#" class="logo"><img src="/static/logos/trans.png" style="width: 50px"><span class="logo"></span></a></li>
-        <li><a href="/home" style="text-decoration: none;"><i class="fa fa-home" style="color:#9C61F1;"></i><span class="nav-item">Home</span></a></li>
-        <li><a href="/pet_care" style="text-decoration: none;"><i class="fa fa-heart"></i><span class="nav-item">Pet Care</span></a></li>
-        <li><a href="/shelters" style="text-decoration: none;"><i class="fa fa-dog"></i><span class="nav-item">Shelters</span></a></li>
-        <li><a href="/saves" style="text-decoration: none;"><i class="fa-regular fa-bookmark"></i><span class="nav-item">Saved</span></a></li>
-        <li><a href="/profile" style="text-decoration: none;"><i class="fa fa-user" style=""></i><span class="nav-item">Profile</span></a></li>
-        <li><a href="/logout" class="logout" style="text-decoration: none;"><i class="fa fa-sign-out-alt"></i><span class="nav-item">Log out</span></a></li>
+        <li style="width: 10%"><a href="#" class="logo"><img src="/static/logos/trans.png" style="width: 50px"><span class="logo"></span></a></li>
+        <li style="width: 10%"><a href="#" style="text-decoration: none;"><i class="fa fa-home" style="color:#9C61F1;"></i><span class="nav-item">Home</span></a></li>
+        <li style="width: 10%"><a href="/pet_care" style="text-decoration: none;"><i class="fa fa-heart"></i><span class="nav-item">Pet Care</span></a></li>
+        <li style="width: 10%"><a href="/shelters" style="text-decoration: none;"><i class="fa fa-dog"></i><span class="nav-item">Shelters</span></a></li>
+        <li style="width: 10%"><a href="/saves" style="text-decoration: none;"><i class="fa-regular fa-bookmark"></i><span class="nav-item">Saved</span></a></li>
+        <li style="width: 10%"><a href="/profile" style="text-decoration: none;"><i class="fa fa-user" style=""></i><span class="nav-item">Profile</span></a></li>
+        <li style="width: 10%"><a href="/logout" class="logout" style="text-decoration: none;"><i class="fa fa-sign-out-alt"></i><span class="nav-item">Log out</span></a></li>
     </ul>
 </div>
 <main style="display: flex; flex-direction: column;">
@@ -27,16 +48,27 @@
         </div>
         -->
         <div class="section-main-parent" style="width: 100%;">
-        <div class="section-main" style="justify-content: center; display: block; align-content: center; margin: auto; margin-top: 5%;">
-        <div class="new_post" style="margin: auto;margin-top: 10%;">
-            <a href="/new_post" style="width: 75%;">What's on your mind?</a>
+
+        <div class="section-main" style="justify-content: center; display: block; align-content: center; margin: auto; margin-top: 5%;margin-top: 10%;">
+            <select id="dropdown" name="options" required style="margin-top: 2%; position: fixed" onchange="sendOption()">
+                <option name="option" value="-" disabled selected>Select flair</option>
+                <option name="option" value="All">All</option>
+                <option name="option" value="Advice">Advice</option>
+                <option name="option" value="Support">Emotional Support</option>
+                <option name="option" value="Report">Report</option>
+                <option name="option" value="Fluff">Fluff</option>
+            </select>
+        <div class="new_post" style="margin: auto;">
+            <a href="/new_post" style="width: 75%;position: static">What's on your mind?</a>
         </div>
+
                 {% for post in posts %}
                 <!--SECTION-LOGIN-2 -->
                 <div class="section-login-2" style="height: border-box">
                     <div class="section-login-2-main">
                         <div class="uname-bar">
                             <h3 class="uname">{{ post[1] }}</h3>
+                            <p style="border-radius: 2px; margin: auto; text-align: center; font-size: 13px; background: #9C61F1; margin-right:10%;">{{ post[4] }}</p>
                             <p class="date">{{ post[5]}}</p>
                         </div>
                         <div class="section-login-2-form">

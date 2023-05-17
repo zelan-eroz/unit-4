@@ -37,11 +37,11 @@ body{
     flex-flow: row;
     align-content: start;
     width: 100%;
-    column-gap: 70%;
 }
 
 .uname{
-    font-size: 15px;
+    font-size: 16px;
+    margin-right: 50%;
 }
 
 .web-title{
@@ -432,6 +432,6 @@ a:hover{
     background: #eee;
 }
 nav:hover{
-    width: 200px;
+    width: 5%;
     transition: all 0.5s ease;
 }
