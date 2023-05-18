@@ -36,7 +36,7 @@ def signup():
             db.close()
             return redirect(url_for("/home",post=[]))
     else:
-        return render_template("signup.html", message=message)
+        return render_template("templates/signup.html", message=message)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -57,16 +57,16 @@ def login():
             else:
                 error = "Incorrect password. Try again."
                 print(error)
-                return render_template('login.html', error=error)
+                return render_template('templates/login.html', error=error)
         else:
             print("User does not exist. Try again.")
         db.close()
     else:
-        return render_template("login.html")
+        return render_template("templates/login.html")
 
 @app.route('/terms')
 def terms():
-    return render_template("terms.html")
+    return render_template("templates/terms.html")
 
 @app.route('/home/<post>', methods=['GET','POST'])
 def home(post:list):
@@ -80,7 +80,7 @@ def home(post:list):
         post = db.search(f"SELECT * from posts")
         print(post)
         db.close()
-    return render_template('home.html', posts=post)
+    return render_template('templates/home.html', posts=post)
 
 @app.route('/process_option', methods=['GET','POST'])
 def process_option():
@@ -93,7 +93,7 @@ def process_option():
         db.close()
         print(posts)
     if request.method=='POST':
-        return render_template('home.html', posts=[])
+        return render_template('templates/home.html', posts=[])
     else:
         return redirect('/home')
 
@@ -121,7 +121,7 @@ def update():
             # UPDATE HTML POSTS
             posts = db.search(f"SELECT * from posts")
             db.close()
-            return render_template('home.html', posts=posts)
+            return render_template('templates/home.html', posts=posts)
         # ---------------------------------------------------------#
         elif request.form['submit']=='save':
             print('save button clicked.')
@@ -136,7 +136,7 @@ def update():
                 print("Saving now")
                 db.run_save(f"INSERT INTO saves(post_id, uid) VALUES({post_id},'{id}')")
             db.close()
-            return render_template('home.html', posts=posts)
+            return render_template('templates/home.html', posts=posts)
         # ---------------------------------------------------------#
         elif request.form['submit']=='comment':
             print('Comment button clicked.')
@@ -157,7 +157,7 @@ def comment():
     print(comments)
     db.close()
 
-    return render_template('new_comment.html', post=post, comments=comments, id=id)
+    return render_template('templates/new_comment.html', post=post, comments=comments, id=id)
 
 
 @app.route("/profile", methods=['GET','POST'])
@@ -171,7 +171,7 @@ def profile2():
         posts = db.search(f"SELECT * from posts where uid='{id}'")
         print(posts)
         db.close()
-        return render_template('profile.html', posts=posts)
+        return render_template('templates/profile.html', posts=posts)
     else:
         return redirect("/home")
 
@@ -183,7 +183,7 @@ def saves():
         db = database_worker('woof.db')
         posts = db.search(f"SELECT * FROM SAVES WHERE uid='{id}'")
         db.close()
-        return render_template('saves.html',posts=posts)
+        return render_template('templates/saves.html', posts=posts)
     else:
         return redirect('/home')
 
@@ -195,7 +195,7 @@ def profile(user_id:int):
         username=db.search(f"SELECT * from users where username='{user_id}'")
         username=username[0][2]
         db.close()
-        return render_template('profile.html',name=username)
+        return render_template('templates/profile.html', name=username)
     else:
         return redirect(url_for(login))
 
@@ -215,23 +215,23 @@ def post():
         db.run_save(new_post)
         db.close()
         return redirect('/home')
-    return render_template('new_post.html')
+    return render_template('templates/new_post.html')
 
 @app.route('/pet_care', methods=['GET','POST'])
 def pet_care():
-    return render_template('pet_care.html')
+    return render_template('templates/pet_care.html')
 
 @app.route('/shelters', methods=['GET','POST'])
 def shelters():
     db = database_worker('woof.db')
     posts = db.search("SELECT * FROM SHELTERS")
     print(posts)
-    return render_template('shelters.html', posts=posts)
+    return render_template('templates/shelters.html', posts=posts)
 
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
-    resp = make_response(render_template('login.html'))
+    resp = make_response(render_template('templates/login.html'))
     resp.set_cookie('user_id', "", expires=0)  # delete cookie
     return resp
 

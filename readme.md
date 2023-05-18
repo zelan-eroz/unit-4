@@ -27,13 +27,13 @@ I will develop a social networking platform in the form of a web application bui
 6. <a style="color: #6817a6" href="#prob4">The web application enables users to bookmark posts and have these bookmarks saved in one page.</a>
 
 **Evidence**
-![](evn3.png) 
+![](Project_Files/evn3.png) 
 *Figure 1. Image of diary entry and pages during brainstorming*
 
-![](evn2.jpg) 
+![](Project_Files/evn2.jpg) 
 *Figure 2. Page on journal during project brainstorming process*
 
-![](evn1.jpg) 
+![](Project_Files/evn1.jpg) 
 *Figure 3. Page on journal during project brainstorming process*
 
 
@@ -178,16 +178,27 @@ I will develop a social networking platform in the form of a web application bui
 
 ### Explanation of Techniques and Evidence
 **Navigation Bar**
+
 ```html
+
 <div class="nav-parent" style="background: white; position: fixed; overflow: hidden;">
     <ul style="display: flex; flex-direction: row; list-style-type: none;">
-        <li style="width: 10%"><a href="/home" class="logo"><img src="/static/logos/trans.png" style="width: 50px"><span class="logo"></span></a></li>
-        <li style="width: 10%"><a href="/home" style="text-decoration: none;"><i class="fa fa-home" style="color:#9C61F1;"></i><span class="nav-item">Home</span></a></li>
-        <li style="width: 10%"><a href="/pet_care" style="text-decoration: none;"><i class="fa fa-heart"></i><span class="nav-item">Pet Care</span></a></li>
-        <li style="width: 10%"><a href="/shelters" style="text-decoration: none;"><i class="fa fa-dog"></i><span class="nav-item">Shelters</span></a></li>
-        <li style="width: 10%"><a href="/saves" style="text-decoration: none;"><i class="fa-regular fa-bookmark"></i><span class="nav-item">Saved</span></a></li>
-        <li style="width: 10%"><a href="/profile" style="text-decoration: none;"><i class="fa fa-user" style=""></i><span class="nav-item">Profile</span></a></li>
-        <li style="width: 10%"><a href="/logout" class="logout" style="text-decoration: none;"><i class="fa fa-sign-out-alt"></i><span class="nav-item">Log out</span></a></li>
+        <li style="width: 10%"><a href="/home" class="logo"><img src="/Project_Files/static/logos/trans.png"
+                                                                 style="width: 50px"><span class="logo"></span></a></li>
+        <li style="width: 10%"><a href="/home" style="text-decoration: none;"><i class="fa fa-home"
+                                                                                 style="color:#9C61F1;"></i><span
+                class="nav-item">Home</span></a></li>
+        <li style="width: 10%"><a href="/pet_care" style="text-decoration: none;"><i class="fa fa-heart"></i><span
+                class="nav-item">Pet Care</span></a></li>
+        <li style="width: 10%"><a href="/shelters" style="text-decoration: none;"><i class="fa fa-dog"></i><span
+                class="nav-item">Shelters</span></a></li>
+        <li style="width: 10%"><a href="/saves" style="text-decoration: none;"><i
+                class="fa-regular fa-bookmark"></i><span class="nav-item">Saved</span></a></li>
+        <li style="width: 10%"><a href="/profile" style="text-decoration: none;"><i class="fa fa-user"
+                                                                                    style=""></i><span class="nav-item">Profile</span></a>
+        </li>
+        <li style="width: 10%"><a href="/logout" class="logout" style="text-decoration: none;"><i
+                class="fa fa-sign-out-alt"></i><span class="nav-item">Log out</span></a></li>
     </ul>
 </div>
 ```
@@ -359,39 +370,51 @@ The code block starting from line 9 handles the specific case when the 'like' bu
 The provided code is important for achieving the success criteria of showing a directory of pet shelters with their name, address, telephone number, email, and contact person.
 
 ```html
+
 <body style="display: flex; flex-direction: row;">
 <div class="nav-parent" style="background: white; position: fixed; overflow: hidden; width: 100%">
     <ul style="display: flex; flex-direction: row; list-style-type: none;">
-        <li><a href="#" class="logo"><img src="/static/logos/trans.png" style="width: 50px"><span class="logo"></span></a></li>
-        <li><a href="/home" style="text-decoration: none;"><i class="fa fa-home"></i><span class="nav-item">Home</span></a></li>
-        <li><a href="/pet_care" style="text-decoration: none;"><i class="fa fa-heart"></i><span class="nav-item">Pet Care</span></a></li>
-        <li><a href="/shelters" style="text-decoration: none;"><i class="fa fa-dog" style="color:#9C61F1;"></i><span class="nav-item" style="color:#9C61F1;">Shelters</span></a></li>
-        <li><a href="/saves" style="text-decoration: none;"><i class="fa-regular fa-bookmark"></i><span class="nav-item">Saved</span></a></li>
-        <li><a href="/profile" style="text-decoration: none;"><i class="fa fa-user" style=""></i><span class="nav-item">Profile</span></a></li>
-        <li><a href="/logout" class="logout" style="text-decoration: none;"><i class="fa fa-sign-out-alt"></i><span class="nav-item">Log out</span></a></li>
+        <li><a href="#" class="logo"><img src="/Project_Files/static/logos/trans.png" style="width: 50px"><span
+                class="logo"></span></a></li>
+        <li><a href="/home" style="text-decoration: none;"><i class="fa fa-home"></i><span class="nav-item">Home</span></a>
+        </li>
+        <li><a href="/pet_care" style="text-decoration: none;"><i class="fa fa-heart"></i><span class="nav-item">Pet Care</span></a>
+        </li>
+        <li><a href="/shelters" style="text-decoration: none;"><i class="fa fa-dog" style="color:#9C61F1;"></i><span
+                class="nav-item" style="color:#9C61F1;">Shelters</span></a></li>
+        <li><a href="/saves" style="text-decoration: none;"><i class="fa-regular fa-bookmark"></i><span
+                class="nav-item">Saved</span></a></li>
+        <li><a href="/profile" style="text-decoration: none;"><i class="fa fa-user" style=""></i><span class="nav-item">Profile</span></a>
+        </li>
+        <li><a href="/logout" class="logout" style="text-decoration: none;"><i class="fa fa-sign-out-alt"></i><span
+                class="nav-item">Log out</span></a></li>
     </ul>
 </div>
 
 
 <!--CARD TO BE REPLICATED-->
 
-    <div class="cards" style="flex-direction: row;row-gap: 10px; padding-top: 5%;">
+<div class="cards" style="flex-direction: row;row-gap: 10px; padding-top: 5%;">
     {% for post in posts %}
-        <div class="card">
-            <div class="card-title" style="margin-top: 2px;">
-                <h2 style="color:#9C61F1;">
-                    {{ post[1]}}
-                    <small style="color: #2F2F2F;font-weight: normal; padding-top: 5px;"><i class="fas fa-map-marker-alt" style="margin-right: 12px;"></i>{{ post[2] }}</small>
-                    <small style="color: #2F2F2F;font-weight: normal;"><i class="fas fa-phone fa-flip-horizontal" style="margin-right: 8px;"></i>{{ post[3] }}</small>
-                </h2>
-            </div>
-            <div class="card-content">
-                <p style="color: #2F2F2F; padding-left: 15px; padding-right: 15px;padding-top:6px;padding-bottom: 10px;">
-                      {{ post[4] }}
-                </p>
-            </div>
-
+    <div class="card">
+        <div class="card-title" style="margin-top: 2px;">
+            <h2 style="color:#9C61F1;">
+                {{ post[1]}}
+                <small style="color: #2F2F2F;font-weight: normal; padding-top: 5px;"><i class="fas fa-map-marker-alt"
+                                                                                        style="margin-right: 12px;"></i>{{
+                    post[2] }}</small>
+                <small style="color: #2F2F2F;font-weight: normal;"><i class="fas fa-phone fa-flip-horizontal"
+                                                                      style="margin-right: 8px;"></i>{{ post[3]
+                    }}</small>
+            </h2>
         </div>
+        <div class="card-content">
+            <p style="color: #2F2F2F; padding-left: 15px; padding-right: 15px;padding-top:6px;padding-bottom: 10px;">
+                {{ post[4] }}
+            </p>
+        </div>
+
+    </div>
 
     {% endfor %}
 </div>
