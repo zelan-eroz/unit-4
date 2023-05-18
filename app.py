@@ -209,10 +209,6 @@ def post():
         date_time = datetime.fromtimestamp(time.time())
         str_date = date_time.strftime("%b %d, %Y")
         print(title, content,flair, str_date)
-        if request.cookies.get('user_id'):
-            print("The cookie was found in creating posts")
-            user_id=request.cookies.get('user_id')
-            print('cookie requested, ', user_id)
         #DO SOMETHING WITH THE POSTS
         db = database_worker("woof.db")
         new_post = f"INSERT into posts (uid,title, post, flair, date,likes) values ('{user_id}','{title}','{content}','{flair}','{str_date}',0)"

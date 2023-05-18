@@ -97,12 +97,15 @@ I will develop a social networking platform in the form of a web application bui
 #### ER Diagram
 ![](documentation/er.jpeg)
 *Figure 9. Entity Relation Diagram of the Woof Wise web app*
-#### Flowcharts ---- TBD!!!!
+#### Flowcharts 
 **Registration System**
+![](documentation/fc1.jpg)
 *Figure 10. Flowchart of the Woof Wise web app registration algorithm*
 **Like/Dislike**
+![](documentation/flow2.jpg)
 *Figure 11. Flowchart of the Woof Wise web app like/dislike algorithm*
 **Add post**
+![](documentation/flow3.jpg)
 *Figure 12. Flowchart of the Woof Wise web app post creation algorithm*
 
 
