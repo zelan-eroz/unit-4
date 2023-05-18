@@ -433,22 +433,31 @@ The code then closes the database connection (line 15) and proceeds to render th
 
 
 
-### Ingenuity
-### Complexity
-
 ## Criteria D. Functionality & Extensibility
 [Video](https://drive.google.com/drive/folders/1Trar2ZFr1MxGIxTw1UsvNMPW6E6Nf78i?usp=sharing)
 
 ## Criteria E. Evaluation
 ### Evaluation
+
 #### Client Evaluation
-| Success Criteria | Status   | Description |
-|------------------|----------|-------------|
-| /                | Achieved |             |
+| Success Criteria | Status   |
+|------------------|----------|
+| 1. <a style="color:orange" href="#prob1">The web application is a social network where users are able to post about topics and categorize them into “Advice”, “Emotional Support”, “Report”, and “Fluff”</a> | Achieved |  
+| 2. <a style="color: orange" href="#prob1"> The solution should enable users to comment on posts to allow interaction.</a> | Achieved | 
+| 3. <a style="color: orange" href="#prob1"> The solution should allow users to like posts</a> | Achieved |
+| 4. <a style="color:#eb349b" href="#prob2">The solution is a web application and it should show general information about pet care into certain categories: “Health”, “Breeds”, “Grooming”, and “Training”.</a> | Achieved | 
+| 5. <a style="color: #c74e1a" href="#prob3">The web app should show a directory of pet shelters. This directory involves the shelter’s name, address, telephone number, email, and contact person.</a> | Achieved | 
+| 6. <a style="color: #6817a6" href="#prob4">The web application enables users to bookmark posts and have these bookmarks saved in one page.</a> | Achieved }|
+
 
 #### Peer Evaluation
+![](documentation/peer_eval.png)
+**Figure 13. Peer Evaluation**
 
 ### Recommendations
+Upon reviewing the website myself, I share and recommend the same functionalities as my peer evaluator. In addition, I think a lot could have been more added to the pet care page. For the shelters page, perhaps the user should be able to add shelters the know themselves but have an admin verify this information. 
+
+For the home page, to make the application organized, I hope to work on adding post sorting and searching functionalities. Lastly, perhaps allowing user to edit profile information edit their information, update a profile photo, or create tags about themselves (i.e., breed of dogs they own and number of dogs). 
 
 
 ### References
