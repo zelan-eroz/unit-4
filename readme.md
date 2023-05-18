@@ -20,11 +20,11 @@ I will develop a social networking platform in the form of a web application bui
 
 ### <a id="criteria"></a>Criteria for Success 
 1. <a style="color:orange" href="#prob1">The web application is a social network where users are able to post about topics and categorize them into “Advice”, “Emotional Support”, “Report”, and “Fluff”</a> 
-2. <a style="color: orange" href="#prob1"> The solution should enable users to post, comment on posts, and like posts.</a> 
-3. <a style="color:#eb349b" href="#prob2">The solution is a web application and it should show general information about pet care into certain categories: “Health”, “Breeds”, “Grooming”, and “Training”.</a>
-4. <a style="color: #c74e1a" href="#prob3">The web app should show a directory of pet shelters. This directory involves the shelter’s name, address, telephone number, email, and contact person.</a>
-5. <a style="color: #6817a6" href="#prob4">The web application enables users to bookmark posts and have these bookmarks saved in one page.</a>
-6. <a href="#prob2" style="color:#eb349b">The web app allows users to view posts according to the flair(category) the post is in.</a>
+2. <a style="color: orange" href="#prob1"> The solution should enable users to comment on posts to allow interaction.</a> 
+3. <a style="color: orange" href="#prob1"> The solution should allow users to like posts</a>
+4. <a style="color:#eb349b" href="#prob2">The solution is a web application and it should show general information about pet care into certain categories: “Health”, “Breeds”, “Grooming”, and “Training”.</a>
+5. <a style="color: #c74e1a" href="#prob3">The web app should show a directory of pet shelters. This directory involves the shelter’s name, address, telephone number, email, and contact person.</a>
+6. <a style="color: #6817a6" href="#prob4">The web application enables users to bookmark posts and have these bookmarks saved in one page.</a>
 
 **Evidence**
 ![](evn3.png) 
@@ -185,7 +185,7 @@ I will develop a social networking platform in the form of a web application bui
 
 **Registration System**
 
-*Although the client did not specify an ecnrypted registration or log in system in the success criteria, it is important to discuss this step as a secure log in and registration system are good practices of a developer.*
+*Although the client did not specify an encrypted registration or log in system in the success criteria, it is important to discuss this step as a secure log in and registration system are good practices of a developer.*
 ```pycon
 @app.route('/signup', methods=['GET','POST'])
 def signup():
@@ -254,37 +254,28 @@ In line 12, a response object is created using make_response. It either renders 
 If the existing_user is empty, indicating that the user does not exist in the database, the code proceeds to line 17 and prints a message stating that the user does not exist.  Finally, in line 20, the database connection is closed, and if the request method is not POST (GET request), the login template is rendered without any error messages.
 
 **Posting Functionality** [***Success Criteria 1***]
-
-**Like/Dislike Functionality** [**Success Criteria 2**]
+This posting functionality fulfills success criteria one and acts as the backbone of the web application. It allows different users to post content to the application.
 ```pycon
-@app.route('/update', methods=['POST'])
-def update():
+@app.route('/new_post', methods=['GET','POST'])
+def post():
     if request.method=='POST':
-        post_id = request.form['post_id']
-        id = request.cookies.get('user_id')
-        db = database_worker('woof.db')
-        if request.form['submit'] == 'like':
-            print('like button clicked')
-            num = request.form['num']
-            # CHECK IF USER ALREADY LIKED
-            liked = db.search(f"SELECT * FROM likes where uid='{id}' AND post_id={post_id}")
-
-            # IF USER ALREADY LIKED, UNLIKE THE POST BY DECREASING NUM VALUE & DELETING ROW IN LIKES
-            if liked:
-                db.run_save(f"UPDATE posts set likes=likes-1 where id={post_id}")
-                db.run_save(f"DELETE from likes where uid='{id}' AND post_id={post_id}")
-            elif not liked:
-                db.run_save(f"UPDATE posts set likes=likes+1 where id={post_id}")
-                db.run_save(f"INSERT INTO likes(post_id,uid) VALUES({post_id},'{id}')")
-
-            # UPDATE HTML POSTS
-            posts = db.search(f"SELECT * from posts")
-            db.close()
-            return render_template('home.html', posts=posts)
+        title = request.form['title']
+        content = request.form['content']
+        flair=request.form['options']
+        date_time = datetime.fromtimestamp(time.time())
+        str_date = date_time.strftime("%b %d, %Y")
+        print(title, content,flair, str_date)
+        #DO SOMETHING WITH THE POSTS
+        db = database_worker("woof.db")
+        new_post = f"INSERT into posts (uid,title, post, flair, date,likes) values ('{user_id}','{title}','{content}','{flair}','{str_date}',0)"
+        db.run_save(new_post)
+        db.close()
+        return redirect('/home')
+    return render_template('new_post.html')
 ```
-The provided code handles the update functionality for a specific post in the Woof Wise web application. The code is associated with the '/update' URL and is triggered when a POST request is made to this URL.
-
-The code block starting from line 9 handles the specific case when the 'like' button is clicked. It checks if the value of the 'submit' field in the form is 'like' (line 9). If it is, the code proceeds to update the likes for the corresponding post and perform the necessary actions. Lines 11-17 handle the logic for liking/unliking a post. First, the code checks if the user has already liked the post by searching for a matching entry in the 'likes' table for the user_id and post_id. If a match is found (line 13), it means the user has already liked the post, so the code decreases the likes count for the post and deletes the corresponding entry in the 'likes' table. If no match is found (line 15), it means the user has not liked the post yet, so the code increases the likes count for the post and inserts a new entry in the 'likes' table.  After updating the likes and likes-related records, the code proceeds to update the HTML representation of the posts (lines 20-21). It performs a new database query to retrieve the updated post data, assigns it to the 'posts' variable, and then closes the database connection.  Finally, the updated posts data is passed to the 'home.html' template, and the template is rendered with the updated data using the render_template function (line 22).
+In the given code snippet, a Flask route is defined at '/new_post' with the allowed methods being GET and POST.
+If the request method is POST, the code retrieves the data submitted in the form fields of the request using the request.form. The values of the 'title', 'content', and 'options' fields are assigned to respective variables: title, content, and flair.
+As stated in the tools used, this section of the code, specifically line 7 to 8, uses datetime to mark when the post was created and use this to update  the database.
 
 **Commenting Functionality - Success Criteria 2**
 ```pycon
@@ -318,11 +309,42 @@ def comment():
     return render_template('new_comment.html', post=post, comments=comments, id=id)
 
 ```
+**Like/Dislike Functionality** [**Success Criteria 3**]
+```pycon
+@app.route('/update', methods=['POST'])
+def update():
+    if request.method=='POST':
+        post_id = request.form['post_id']
+        id = request.cookies.get('user_id')
+        db = database_worker('woof.db')
+        if request.form['submit'] == 'like':
+            print('like button clicked')
+            num = request.form['num']
+            # CHECK IF USER ALREADY LIKED
+            liked = db.search(f"SELECT * FROM likes where uid='{id}' AND post_id={post_id}")
 
-**Pet Care Page - Success Criteria 3**
+            # IF USER ALREADY LIKED, UNLIKE THE POST BY DECREASING NUM VALUE & DELETING ROW IN LIKES
+            if liked:
+                db.run_save(f"UPDATE posts set likes=likes-1 where id={post_id}")
+                db.run_save(f"DELETE from likes where uid='{id}' AND post_id={post_id}")
+            elif not liked:
+                db.run_save(f"UPDATE posts set likes=likes+1 where id={post_id}")
+                db.run_save(f"INSERT INTO likes(post_id,uid) VALUES({post_id},'{id}')")
+
+            # UPDATE HTML POSTS
+            posts = db.search(f"SELECT * from posts")
+            db.close()
+            return render_template('home.html', posts=posts)
+```
+The provided code handles the update functionality for a specific post in the Woof Wise web application. The code is associated with the '/update' URL and is triggered when a POST request is made to this URL.
+
+The code block starting from line 9 handles the specific case when the 'like' button is clicked. It checks if the value of the 'submit' field in the form is 'like' (line 9). If it is, the code proceeds to update the likes for the corresponding post and perform the necessary actions. Lines 11-17 handle the logic for liking/unliking a post. First, the code checks if the user has already liked the post by searching for a matching entry in the 'likes' table for the user_id and post_id. If a match is found (line 13), it means the user has already liked the post, so the code decreases the likes count for the post and deletes the corresponding entry in the 'likes' table. If no match is found (line 15), it means the user has not liked the post yet, so the code increases the likes count for the post and inserts a new entry in the 'likes' table.  After updating the likes and likes-related records, the code proceeds to update the HTML representation of the posts (lines 20-21). It performs a new database query to retrieve the updated post data, assigns it to the 'posts' variable, and then closes the database connection.  Finally, the updated posts data is passed to the 'home.html' template, and the template is rendered with the updated data using the render_template function (line 22).
 
 
-**Shelters Information Page - Success Criteria 4**
+**Pet Care Page - Success Criteria 4**
+
+
+**Shelters Information Page - Success Criteria 5**
 
 The provided code is important for achieving the success criteria of showing a directory of pet shelters with their name, address, telephone number, email, and contact person.
 
@@ -381,7 +403,7 @@ Line 4 executes a SELECT query on the 'woof.db' database, retrieving all the dat
 The `SHELTERS` table in the woof.db database contains the shelter name, address, phone number, and content.
 
 
-**Bookmark/Save Post Functionality - Success Criteria 5**
+**Bookmark/Save Post Functionality - Success Criteria 6**
 
 The provided code handles the bookmarking functionality for a specific post in the Woof Wise web application, which is directly related to the success criteria of allowing users to bookmark posts and save them in one page. This adds to the element of personalization stated in the problem description by allowing users to save information that are significant to them, based on their situation or pet's needs.
 ```pycon
