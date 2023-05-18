@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-05-18T00:07:04.933Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="dTCix4jHG-uHxHFEWS8X" version="21.2.9" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2023-05-18T00:15:02.097Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="IDvTv_F_5ybLa8DR_KVT" version="21.2.9" type="github" pages="3">
   <diagram name="Page-1" id="a427sYdCS5uKMXAuydk3">
     <mxGraphModel dx="437" dy="311" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -142,7 +142,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="WB0vrkB2nTaqmQI2Dpbl" name="flow1">
-    <mxGraphModel dx="1087" dy="1377" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="-239" dy="1180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -268,6 +268,97 @@
         </mxCell>
         <mxCell id="tvTWokDzRW237iDCIzXE-55" value="END" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1035" y="1000" width="80" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Cum8NkbGyGpgTgOUegLg" name="flow2">
+    <mxGraphModel dx="620" dy="826" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-2" target="adE9bJjqZBPwGVC7OSN0-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-2" value="START" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="40" width="90" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-4" target="adE9bJjqZBPwGVC7OSN0-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-4" value="Get the post id of the post liked, and the user id of the user who liked the post" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="110" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-5" target="adE9bJjqZBPwGVC7OSN0-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-5" value="Open database" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="25" y="180" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-6" target="adE9bJjqZBPwGVC7OSN0-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-6" value="Check the database if the user already liked this post" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="230" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-7" target="adE9bJjqZBPwGVC7OSN0-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-7" target="adE9bJjqZBPwGVC7OSN0-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-7" value="If user already liked" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="290" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-10" target="adE9bJjqZBPwGVC7OSN0-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-10" value="Dislike by decreasing the post&#39;s likes count by 1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-12" target="adE9bJjqZBPwGVC7OSN0-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-12" value="Remove the entry in the &#39;likes&#39; log in the database" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-14" value="YES" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="370" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-15" target="adE9bJjqZBPwGVC7OSN0-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-15" value="Like the post by increasing the post&#39;s likes count by 1" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-16" target="adE9bJjqZBPwGVC7OSN0-23">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="540" />
+              <mxPoint x="130" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-16" value="Add entry to the &#39;likes&#39; log in the database" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-19" value="NO" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="150" y="300" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-23" target="adE9bJjqZBPwGVC7OSN0-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-23" value="Close the database" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="550" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="adE9bJjqZBPwGVC7OSN0-27" target="adE9bJjqZBPwGVC7OSN0-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-27" value="Update the webpage with the new likes cont." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="610" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="adE9bJjqZBPwGVC7OSN0-29" value="END" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="85" y="670" width="90" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
