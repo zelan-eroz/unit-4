@@ -149,33 +149,31 @@ I will develop a social networking platform in the form of a web application bui
 | CSS                       | Together with HTML, I used CSS to work on the aesthetic or visual appearance of the app and the corresponding elements within each HTML file.                                                                                                       |
 | ChatGPT                   | The tool was consulted to create code benchmarks, not the code of the app itself, for specific aspects of the web app development process where I wasn't familiar of. Ex. pop ups.                                                                  |
 
-| Library/Module          | Explanation of Use |
-|-------------------------|--------------------|
-| Flask: Flask            |                    |
-| Flask: request          |                    |
-| Flask: render_template  |                    |
-| Flask: redirect         |                    |
-| Flask: url_for          |                    |
-| Flask: make_response    |                    |
-| Python: time & datetime |                    |
-| Python: sqlite3         |                    |
-| Python: CryptContext    |                    |
+| Library/Module          | Explanation of Use                                                                                                                                                |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Flask: Flask            | I used Flask to provide a framework for creating a dynamic scheme for my webpages, handling user requests, and overall the back-end logic of the web application. |
+| Flask: request          | I obtained the entries entered into the web page (form submissions) through Flask request.                                                                        |
+| Flask: render_template  | Used to generate the dynamic HTML pages.                                                                                                                          |
+| Flask: redirect         | To enable the user's transfer between pages, this tool allows the app to direct users to a different URL or page from a specific action.                          |
+| Flask: url_for          | I used this within the HTML files to redirect a certain submission form to a certain function (ex. liking post)                                                   |
+| Flask: make_response    | This was used along a cookie to independently render a certain webpage to the user's end after a specific action.                                                 |
+| Python: time & datetime | I specifically used this to mark the date a user attempted to create a new post and then add the date retrieve using this function to the database.               |
+| Python: sqlite3         | Create a database worker that searches, commits, opens, and closes the database.                                                                                  |
+| Python: CryptContext    | Ensure that the login and registration system are encrypted by hashing the passwords entered or registered.                                                       |
 
 
-
-| Technique Applied      | Explanation of Use |
-|------------------------|--------------------|
-| Flask App Routing      |                    |
-| Cookies                |                    |
-| GET and POST methods   |                    |
-| Functions              |                    |
-| if and else statements |                    |
-| variables              |                    |
-| for loops              |                    |
-| Password Encryption    |                    |
-| Database interaction   |                    |
-| Text formatting        |                    |
-| CSS styling            |                    |
+**Techniques Applied**
+* Flask App Routing
+* Cookies
+* GET and POST methods
+* Functions
+* if and else statements
+* variables
+* for loops
+* Password Encryption
+* Database interaction
+* Text Formatting 
+* CSS styling
 
 
 ### Explanation of Techniques and Evidence
@@ -410,8 +408,6 @@ Lines 7-14 handle the bookmarking logic. The code checks if the user has already
 If no match is found (line 11), it means the user has not saved the post yet, so the code inserts a new entry in the 'saves' table, indicating that the user has bookmarked the post.
 
 The code then closes the database connection (line 15) and proceeds to render the 'home.html' template with the updated list of posts (line 16). This ensures that the user sees the updated bookmarked status of the post on the home page.
-
-**Post Sorting Functionality**
 
 
 
