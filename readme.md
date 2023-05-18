@@ -419,8 +419,7 @@ The code then closes the database connection (line 15) and proceeds to render th
 ### Complexity
 
 ## Criteria D. Functionality & Extensibility
-### Functionality
-### Extensibility
+[Video](https://drive.google.com/drive/folders/1Trar2ZFr1MxGIxTw1UsvNMPW6E6Nf78i?usp=sharing)
 
 ## Criteria E. Evaluation
 ### Evaluation
