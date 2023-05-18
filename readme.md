@@ -178,10 +178,20 @@ I will develop a social networking platform in the form of a web application bui
 
 ### Explanation of Techniques and Evidence
 **Navigation Bar**
-
-**Cards**
-
-**App Routing**
+```html
+<div class="nav-parent" style="background: white; position: fixed; overflow: hidden;">
+    <ul style="display: flex; flex-direction: row; list-style-type: none;">
+        <li style="width: 10%"><a href="/home" class="logo"><img src="/static/logos/trans.png" style="width: 50px"><span class="logo"></span></a></li>
+        <li style="width: 10%"><a href="/home" style="text-decoration: none;"><i class="fa fa-home" style="color:#9C61F1;"></i><span class="nav-item">Home</span></a></li>
+        <li style="width: 10%"><a href="/pet_care" style="text-decoration: none;"><i class="fa fa-heart"></i><span class="nav-item">Pet Care</span></a></li>
+        <li style="width: 10%"><a href="/shelters" style="text-decoration: none;"><i class="fa fa-dog"></i><span class="nav-item">Shelters</span></a></li>
+        <li style="width: 10%"><a href="/saves" style="text-decoration: none;"><i class="fa-regular fa-bookmark"></i><span class="nav-item">Saved</span></a></li>
+        <li style="width: 10%"><a href="/profile" style="text-decoration: none;"><i class="fa fa-user" style=""></i><span class="nav-item">Profile</span></a></li>
+        <li style="width: 10%"><a href="/logout" class="logout" style="text-decoration: none;"><i class="fa fa-sign-out-alt"></i><span class="nav-item">Log out</span></a></li>
+    </ul>
+</div>
+```
+The navigation bar is an important part of any web application for integration and for the user's experience. I used icons from font awesome to use icons for this website as isual icons are helpful in websites as they provide a quick and intuitive way to convey information, guide user actions, and enhance the overall user experience by facilitating easy recognition and understanding.
 
 **Registration System**
 
